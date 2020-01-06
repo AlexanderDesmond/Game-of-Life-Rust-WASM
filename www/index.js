@@ -21,14 +21,20 @@ canvas.width = (CELL_SIZE + 1) * width + 1;
 // Get context.
 const ctx = canvas.getContext("2d");
 
+// Initialise play/pause button.
+const playPauseButton = document.getElementById("play-pause");
+
+// Handle pausing and resuming.
+let animationId = null;
+
 // Render loop.
 const renderLoop = () => {
-  universe.tick();
-
   drawGrid();
   drawCells();
 
-  requestAnimationFrame(renderLoop);
+  universe.tick();
+
+  animationId = requestAnimationFrame(renderLoop);
 };
 
 // Draw the grid.
@@ -81,6 +87,35 @@ const drawCells = () => {
   ctx.stroke();
 };
 
+// Returns true if the game of life is paused,
+// returns false otherwise.
+const isPaused = () => {
+  return animationId === null;
+};
+
+// Play the game of life
+const play = () => {
+  playPauseButton.textContent = "⏸";
+  renderLoop();
+};
+
+// Pause game of life
+const pause = () => {
+  playPauseButton.textContent = "▶";
+  cancelAnimationFrame(animationId);
+  animationId = null;
+};
+
+// Handle the playing and pausing of the game of life
+playPauseButton.addEventListener("click", event => {
+  if (isPaused()) {
+    play();
+  } else {
+    pause();
+  }
+});
+
 drawGrid();
 drawCells();
-requestAnimationFrame(renderLoop);
+//requestAnimationFrame(renderLoop);
+play();
