@@ -110,6 +110,19 @@ impl Universe {
     pub fn render(&self) -> String {
         self.to_string()
     }
+
+    // Getter functions
+    pub fn width(&self) -> u32 {
+        self.width
+    }
+
+    pub fn height(&self) -> u32 {
+        self.height
+    }
+
+    pub fn cells(&self) -> *const Cell {
+        self.cells.as_ptr()
+    }
 }
 
 // Format the cell state as either filled or empty squares,

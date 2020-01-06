@@ -2,15 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Hello wasm-pack!</title>
-  </head>
-  <body>
-    <noscript
-      >This page contains webassembly and javascript content, please enable
-      javascript in your browser.</noscript
-    >
-    <pre id="game-of-life-canvas"></pre>
-    <script src="./bootstrap.js"></script>
+    <title>The Game of Life</title>
+
     <style>
       body {
         position: absolute;
@@ -24,5 +17,13 @@
         justify-content: center;
       }
     </style>
+  </head>
+  <body>
+    <noscript
+      >This page contains webassembly and javascript content, please enable
+      javascript in your browser.</noscript
+    >
+    <canvas id="game-of-life-canvas"></canvas>
+    <script src="./bootstrap.js"></script>
   </body>
 </html>
