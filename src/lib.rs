@@ -18,6 +18,16 @@ pub enum Cell {
     Alive = 1
 }
 
+impl Cell {
+    // Toggle cell state.
+    fn toggle(&mut self) {
+        *self = match *self {
+            Cell::Dead => Cell::Alive,
+            Cell::Alive => Cell::Dead,
+        };
+    }
+}
+
 #[wasm_bindgen]
 pub struct Universe {
     width: u32,
@@ -113,6 +123,12 @@ impl Universe {
         self.to_string()
     }
 
+    // Handle the toggling of cell states.
+    pub fn toggle_cell(&mut self, row: u32, column: u32) {
+        let idx = self.get_index(row, column);
+        self.cells[idx].toggle();
+    }
+
     // Getter functions
     pub fn width(&self) -> u32 {
         self.width
@@ -136,6 +152,8 @@ impl Universe {
         self.height = height;
         self.cells = (0..self.width * height).map(|_i| Cell::Dead).collect();
     }
+
+    
 }
 
 // For testing
